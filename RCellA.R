@@ -1,8 +1,8 @@
 RCellA <- function(worldsize = 100, epochs = 100, rule = "184")
 {
-  dorule <- function(tuple)
+  dorule <- function(tuple, r = rule)
   {
-    if (rule == "184")
+    if (r == "184")
     {
       rulebook <- c("111" = 1, "110" = 0, "101" = 1,
                     "100" = 1, "011" = 1, "010" = 0,
@@ -19,7 +19,7 @@ RCellA <- function(worldsize = 100, epochs = 100, rule = "184")
   }
   
   
-  update <- function(row)
+  update <- function(row, r = rule)
   {
     
     
@@ -29,14 +29,14 @@ RCellA <- function(worldsize = 100, epochs = 100, rule = "184")
     tuples[3, ] <- c(row[2 : length(row)], 0)
     
     
-    return(apply(tuples, 2, dorule))
+    return(apply(tuples, 2, dorule, r = r))
     
   }
   
   world <- matrix(nrow = epochs, ncol = worldsize)
   world[1, ] <- round(runif(worldsize, 0, 1))
   
-  for (i in 2 : epochs) {world[i,] <- update(row = world[i - 1,])}
+  for (i in 2 : epochs) {world[i,] <- update(row = world[i - 1,], r = rule)}
   
   return(world)
 }
