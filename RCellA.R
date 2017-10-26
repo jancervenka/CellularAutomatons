@@ -1,8 +1,5 @@
 RCellA <- function(worldsize = 100, epochs = 100, rule = "184")
 {
-  worldsize = 100
-  epochs = 100
-  
   dorule <- function(tuple)
   {
     if (rule == "184")
